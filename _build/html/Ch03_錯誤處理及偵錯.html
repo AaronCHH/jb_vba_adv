@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ch03 錯誤處理及偵錯 &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ch04 陣列及自訂項目" href="Ch04_%E9%99%A3%E5%88%97%E5%8F%8A%E8%87%AA%E8%A8%82%E9%A0%85%E7%9B%AE.html" />
+    <link rel="prev" title="Ch02事件程序" href="Ch02_%E4%BA%8B%E4%BB%B6%E7%A8%8B%E5%BA%8F.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch01_%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%85%B1%E5%90%8C%E9%81%8B%E4%BD%9C%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%80%85%E8%87%AA%E8%A8%82%E5%87%BD%E6%95%B8.html">
+   Ch01 程序的共同運作及使用者自訂函數
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch02_%E4%BA%8B%E4%BB%B6%E7%A8%8B%E5%BA%8F.html">
+   Ch02事件程序
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ch03 錯誤處理及偵錯
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch04_%E9%99%A3%E5%88%97%E5%8F%8A%E8%87%AA%E8%A8%82%E9%A0%85%E7%9B%AE.html">
+   Ch04 陣列及自訂項目
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch05_%E8%9E%A2%E5%B9%95%E9%A1%AF%E7%A4%BA%E5%8F%8A%E5%85%A7%E5%BB%BA%E4%BA%A4%E8%AB%87%E7%AA%97.html">
+   Ch05 螢幕顯示及內建交談窗
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch06_%E5%8A%9F%E8%83%BD%E8%A1%A8%E5%88%97%E8%88%87%E5%B7%A5%E5%85%B7%E5%88%97.html">
+   Ch06 功能表列與工具列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch07_%E5%9C%96%E8%A1%A8.html">
+   Ch07 圖表
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch08_%E6%AA%94%E6%A1%88%E7%AE%A1%E7%90%86.html">
+   Ch08 檔案管理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch09_%E8%88%87%E5%85%B6%E4%BB%96%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F%E7%9A%84%E5%85%B1%E5%90%8C%E9%81%8B%E4%BD%9C.html">
+   Ch09 與其他應用程式的共同運作
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch10_%E6%B4%BB%E7%94%A8%E8%B3%87%E6%96%99%E5%BA%AB.html">
+   Ch10 活用資料庫
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Ch03_錯誤處理及偵錯.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FCh03_錯誤處理及偵錯.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-error-goto">
+   範例21 On Error GoTo陳述式範例
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ch03">
+<h1>Ch03 錯誤處理及偵錯<a class="headerlink" href="#ch03" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="on-error-goto">
+<h2>範例21 On Error GoTo陳述式範例<a class="headerlink" href="#on-error-goto" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>Attribute VB_Name = “Module1”
+Option Explicit
+‘————————————
+‘範例21 On Error GoTo陳述式範例
+‘————————————</p>
+<p>Sub TrapSample()</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;啟用Error Trap功能
+On Error GoTo HandleErr
+
+&#39;預測會發生錯誤的陳述式
+ActiveWorkbook.Charts(1).Activate
+
+&#39;沒有發生錯誤的處理程序
+ActiveChart.SizeWithWindow = True
+MsgBox &quot;執行完成，沒有發生錯誤。&quot;
+Exit Sub
+</pre></div>
+</div>
+<p>HandleErr:
+MsgBox “圖表工作表不存在。”
+End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## 範例22 On Error Resume Next陳述式範例</span>
+</pre></div>
+</div>
+<p>‘——————————————-
+‘範例22 On Error Resume Next陳述式範例
+‘——————————————-</p>
+<p>Sub TrapSample2()
+Dim myRange As Range
+Dim myPrompt As String, myTitle As String</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Worksheets(&quot;Sheet3&quot;).Activate
+Cells.Clear
+
+myPrompt = &quot;被選取的儲存格範圍將輸入「ABC」&quot; &amp; vbCr &amp; _
+    &quot;請使用滑鼠選取儲存格範圍。&quot;
+myTitle = &quot;輸入儲存格範圍&quot;
+
+&#39;啟用Error Trap功能
+On Error Resume Next
+
+&#39;預測會發生錯誤的陳述式
+Set myRange = Application.InputBox(Prompt:=myPrompt, _
+    Title:=myTitle, Type:=8)
+
+&#39;判斷前面的陳述式是否發生錯誤
+If myRange Is Nothing Then Exit Sub
+
+myRange.Value = &quot;ABC&quot;
+</pre></div>
+</div>
+<p>End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## 範例23 查詢錯誤代碼及錯誤訊息</span>
+</pre></div>
+</div>
+<p>‘—————————–
+‘範例23 查詢錯誤代碼及錯誤訊息
+‘—————————–</p>
+<p>Sub DisplayErr()
+Dim myMsg As String</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Worksheets(&quot;Sheet4&quot;).Activate
+
+On Error GoTo HandleErr
+
+Range(&quot;B3&quot;).Value = Range(&quot;B1&quot;).Value / Range(&quot;B2&quot;).Value
+
+Exit Sub
+</pre></div>
+</div>
+<p>HandleErr:
+myMsg = “錯誤代碼：” &amp; Err.Number &amp; vbCrLf &amp; _
+“錯誤訊息：” &amp; Err.Description
+MsgBox myMsg</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Range(&quot;B3&quot;).Value = 0
+</pre></div>
+</div>
+<p>End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## 範例24 依據錯誤種類判斷條件</span>
+</pre></div>
+</div>
+<p>‘——————————–
+‘範例24 依據錯誤種類判斷條件
+‘——————————–</p>
+<p>Sub OpenFile()
+Dim myFD As Variant, myFN As Variant
+Dim myPrompt As String, myMsg As String
+Dim myBuf As String</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MsgBox &quot;請在磁碟機的根目錄下準備一個文字檔案，&quot; _
+    &amp; vbCr &amp; &quot;不限制檔案名稱。&quot;
+</pre></div>
+</div>
+<p>InputFD:
+myPrompt = “請輸入磁碟機代號：”
+myFD = Application.InputBox(Prompt:=myPrompt, Default:=”A”)
+If VarType(myFD) &lt;&gt; vbString Then Exit Sub</p>
+<p>InputFN:
+myPrompt = “請輸入檔案名稱：”
+myFN = Application.InputBox(Prompt:=myPrompt)
+If VarType(myFN) &lt;&gt; vbString Then Exit Sub</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On Error GoTo HandleErr
+
+Open myFD &amp; &quot;:\&quot; &amp; myFN For Input As #1
+
+Do Until EOF(1)
+    Line Input #1, myBuf
+Loop
+
+MsgBox &quot;處理完成，沒有發生錯誤。&quot;
+Close #1
+
+Exit Sub
+</pre></div>
+</div>
+<p>HandleErr:
+Select Case Err.Number
+Case 53                 ‘找不到檔案
+MsgBox Err.Description &amp; vbCr &amp; _
+“請重新輸入檔案名稱：”
+Resume InputFN</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    Case 55                 &#39;檔案已開啟
+        MsgBox Err.Description
+        Resume Next
+    
+    Case 68, 75, 76         &#39;週邊設備無法使用
+        MsgBox Err.Description &amp; vbCr &amp; vbCr &amp; _
+            &quot;指定的磁碟無效，&quot; &amp; vbCr &amp; _
+            &quot;請再輸入磁磁代號：&quot;
+        Resume InputFD
+    
+    Case 52, 71             &#39;磁碟尚未就緒
+        myMsg = Err.Description &amp; vbCr &amp; _
+            &quot;要插入磁片繼續嗎？&quot;
+        If MsgBox(myMsg, vbExclamation + vbYesNo) = vbYes Then
+            Resume
+        Else
+            Exit Sub
+        End If
+End Select
+</pre></div>
+</div>
+<p>End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## 範例25 將值輸出到即時運算視窗</span>
+</pre></div>
+</div>
+<p>‘————————————
+‘範例25 將值輸出到即時運算視窗
+‘————————————</p>
+<p>Sub OutToWindow()
+Dim n As Integer, m As Integer</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>For n = 1 To 10
+    m = 2 ^ n
+    Debug.Print &quot;m=&quot; &amp; m        &#39;開啟即時運算視窗
+Next
+
+&#39;Stop
+</pre></div>
+</div>
+<p>End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">## 03章-2</span>
+<span class="c1">## Module1</span>
+</pre></div>
+</div>
+<p>Attribute VB_Name = “Module1”
+Option Explicit</p>
+<p>Sub StepMode()
+Dim i As Integer, j As Integer
+Dim mySum As Integer</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Worksheets(&quot;Sheet3&quot;).Activate
+Range(&quot;A1:B1&quot;).ClearContents
+
+i = 1
+j = 10
+mySum = F_AddNumber(i, j)
+
+Range(&quot;A1&quot;).Value = mySum
+Range(&quot;B1&quot;).Value = &quot;¤¸&quot;
+</pre></div>
+</div>
+<p>End Sub</p>
+<p>Function F_AddNumber(myMin, myMax)
+Dim k As Integer</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>For k = myMin To myMax
+    F_AddNumber = F_AddNumber + k
+Next k
+</pre></div>
+</div>
+<p>End Function</p>
+<p>Sub WriteA2()
+Dim myLen As Integer, i As Integer
+Dim myVal As Variant</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Worksheets(&quot;Sheet1&quot;).Activate
+
+myLen = Len(Range(&quot;A1&quot;).Value)
+
+For i = 1 To myLen
+    myVal = Mid(Range(&quot;A1&quot;).Value, i, 1)
+    If F_NumCheck(myVal) = True Then
+        Range(&quot;A2&quot;).Value = Range(&quot;A2&quot;).Value &amp; myVal
+    End If
+Next
+</pre></div>
+</div>
+<p>End Sub</p>
+<p>Function F_NumCheck(v) As Boolean
+If v &gt;= 0 And v &lt;= 9 Then
+F_NumCheck = True
+Else
+F_NumCheck = False
+End If
+End Function</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Module2</span>
+</pre></div>
+</div>
+<p>Attribute VB_Name = “Module2”
+Option Explicit</p>
+<p>Sub LocalWindow()
+Dim myWS As Worksheet
+Dim myName(4) As String
+Dim i As Integer</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Set myWS = Worksheets(2)
+
+For i = 0 To 4
+    myName(i) = myWS.Cells(i + 1, 1).Value
+Next
+</pre></div>
+</div>
+<p>End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Module3</span>
+</pre></div>
+</div>
+<p>Attribute VB_Name = “Module3”
+Sub Main()</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Call x
+
+Call y
+</pre></div>
+</div>
+<p>End Sub</p>
+<p>Sub x()</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MsgBox &quot;程序「x」執行中。&quot;
+</pre></div>
+</div>
+<p>End Sub</p>
+<p>Sub y()</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>MsgBox &quot;程序「y」執行中。&quot;
+</pre></div>
+</div>
+<p>End Sub</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Ch02_%E4%BA%8B%E4%BB%B6%E7%A8%8B%E5%BA%8F.html" title="previous page">Ch02事件程序</a>
+    <a class='right-next' id="next-link" href="Ch04_%E9%99%A3%E5%88%97%E5%8F%8A%E8%87%AA%E8%A8%82%E9%A0%85%E7%9B%AE.html" title="next page">Ch04 陣列及自訂項目</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
