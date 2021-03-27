@@ -1,7 +1,5 @@
 Welcome to your Jupyter Book
 ============================
 
-This is a small sample book to give you a feel for how book content is
-structured.
-
-Check out the content pages bundled with this sample book to get started.
+Re-arrange of code in book 「超圖解Excel VBA 應用講座」  
+旗標 2006; 作者：大村 譯者：亮亨  
