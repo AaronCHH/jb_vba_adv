@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ch04 陣列及自訂項目 &#8212; My sample book</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ch05 螢幕顯示及內建交談窗" href="Ch05_%E8%9E%A2%E5%B9%95%E9%A1%AF%E7%A4%BA%E5%8F%8A%E5%85%A7%E5%BB%BA%E4%BA%A4%E8%AB%87%E7%AA%97.html" />
+    <link rel="prev" title="Ch03 錯誤處理及偵錯" href="Ch03_%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86%E5%8F%8A%E5%81%B5%E9%8C%AF.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">My sample book</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch01_%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%85%B1%E5%90%8C%E9%81%8B%E4%BD%9C%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%80%85%E8%87%AA%E8%A8%82%E5%87%BD%E6%95%B8.html">
+   Ch01 程序的共同運作及使用者自訂函數
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch02_%E4%BA%8B%E4%BB%B6%E7%A8%8B%E5%BA%8F.html">
+   Ch02事件程序
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch03_%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86%E5%8F%8A%E5%81%B5%E9%8C%AF.html">
+   Ch03 錯誤處理及偵錯
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ch04 陣列及自訂項目
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch05_%E8%9E%A2%E5%B9%95%E9%A1%AF%E7%A4%BA%E5%8F%8A%E5%85%A7%E5%BB%BA%E4%BA%A4%E8%AB%87%E7%AA%97.html">
+   Ch05 螢幕顯示及內建交談窗
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch06_%E5%8A%9F%E8%83%BD%E8%A1%A8%E5%88%97%E8%88%87%E5%B7%A5%E5%85%B7%E5%88%97.html">
+   Ch06 功能表列與工具列
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch07_%E5%9C%96%E8%A1%A8.html">
+   Ch07 圖表
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch08_%E6%AA%94%E6%A1%88%E7%AE%A1%E7%90%86.html">
+   Ch08 檔案管理
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch09_%E8%88%87%E5%85%B6%E4%BB%96%E6%87%89%E7%94%A8%E7%A8%8B%E5%BC%8F%E7%9A%84%E5%85%B1%E5%90%8C%E9%81%8B%E4%BD%9C.html">
+   Ch09 與其他應用程式的共同運作
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch10_%E6%B4%BB%E7%94%A8%E8%B3%87%E6%96%99%E5%BA%AB.html">
+   Ch10 活用資料庫
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Ch04_陣列及自訂項目.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FCh04_陣列及自訂項目.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   範例26 陣列變數的基本語法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   範例27 動態陣列變數的基本語法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lboundubound">
+   範例28 使用LBound函數及UBound函數建立迴圈
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   範例29 保留陣列的值，變更元素數量
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   範例30 二維陣列的基本使用方式
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-each-next">
+   範例31 在二維陣列中使用For Each…Next陳述式
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variant">
+   範例32 將Variant型態變數設為儲存格範圍的值
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   範例33 使用者自訂型態變數的基本使用方式
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#static">
+   範例34 Static陳述式的基本使用方式
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   範例35 使用者自訂常數的基本使用方式
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ch04">
+<h1>Ch04 陣列及自訂項目<a class="headerlink" href="#ch04" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>範例26 陣列變數的基本語法<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attribute</span> <span class="n">VB_Name</span> <span class="o">=</span> <span class="s2">&quot;Module1&quot;</span>
+<span class="n">Option</span> <span class="n">Explicit</span>
+<span class="s1">&#39;------------------</span>
+<span class="s1">&#39;範例26 陣列變數的基本語法</span>
+<span class="s1">&#39;------------------</span>
+
+<span class="n">Sub</span> <span class="n">OneWeek</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myWeek</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="n">As</span> <span class="n">String</span>
+    <span class="n">Dim</span> <span class="n">i</span> <span class="n">As</span> <span class="n">Integer</span>
+    
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期日&quot;</span>
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期一&quot;</span>
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期二&quot;</span>
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期三&quot;</span>
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期四&quot;</span>
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期五&quot;</span>
+    <span class="n">myWeek</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;星期六&quot;</span>
+    
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">To</span> <span class="mi">6</span>
+        <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">myWeek</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">Next</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>範例27 動態陣列變數的基本語法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attribute</span> <span class="n">VB_Name</span> <span class="o">=</span> <span class="s2">&quot;Module2&quot;</span>
+<span class="n">Option</span> <span class="n">Explicit</span>
+<span class="n">Option</span> <span class="n">Base</span> <span class="mi">1</span>
+<span class="s1">&#39;---------------------</span>
+<span class="s1">&#39;範例27 動態陣列變數的基本語法</span>
+<span class="s1">&#39;---------------------</span>
+
+<span class="n">Sub</span> <span class="n">ReDimSample</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myName</span><span class="p">()</span> <span class="n">As</span> <span class="n">String</span>
+    
+    <span class="n">Dim</span> <span class="n">r</span> <span class="n">As</span> <span class="n">Long</span><span class="p">,</span> <span class="n">i</span> <span class="n">As</span> <span class="n">Long</span>
+
+    <span class="n">Worksheets</span><span class="p">(</span><span class="s2">&quot;3年A班&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Activate</span>
+    
+    <span class="s1">&#39;算出資料輸入的最後一列</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;A65536&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">End</span><span class="p">(</span><span class="n">xlUp</span><span class="p">)</span><span class="o">.</span><span class="n">Row</span>
+
+    <span class="n">ReDim</span> <span class="n">myName</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">To</span> <span class="n">r</span>
+        <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span>
+    <span class="n">Next</span>
+        
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">To</span> <span class="n">r</span>
+        <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">Next</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="lboundubound">
+<h2>範例28 使用LBound函數及UBound函數建立迴圈<a class="headerlink" href="#lboundubound" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;----------------------------------</span>
+<span class="s1">&#39;範例28 使用LBound函數及UBound函數建立迴圈</span>
+<span class="s1">&#39;----------------------------------</span>
+
+<span class="n">Sub</span> <span class="n">ReDimSample2</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myName</span><span class="p">()</span> <span class="n">As</span> <span class="n">String</span>
+    
+    <span class="n">Dim</span> <span class="n">r</span> <span class="n">As</span> <span class="n">Long</span><span class="p">,</span> <span class="n">i</span> <span class="n">As</span> <span class="n">Long</span>
+
+    <span class="n">Worksheets</span><span class="p">(</span><span class="s2">&quot;3年A班&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Activate</span>
+    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;A65536&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">End</span><span class="p">(</span><span class="n">xlUp</span><span class="p">)</span><span class="o">.</span><span class="n">Row</span>
+
+    <span class="n">ReDim</span> <span class="n">myName</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="n">LBound</span><span class="p">(</span><span class="n">myName</span><span class="p">)</span> <span class="n">To</span> <span class="n">UBound</span><span class="p">(</span><span class="n">myName</span><span class="p">)</span>
+        <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span>
+    <span class="n">Next</span>
+        
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="n">LBound</span><span class="p">(</span><span class="n">myName</span><span class="p">)</span> <span class="n">To</span> <span class="n">UBound</span><span class="p">(</span><span class="n">myName</span><span class="p">)</span>
+        <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">Next</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>範例29 保留陣列的值，變更元素數量<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attribute</span> <span class="n">VB_Name</span> <span class="o">=</span> <span class="s2">&quot;Module3&quot;</span>
+<span class="n">Option</span> <span class="n">Explicit</span>
+<span class="n">Option</span> <span class="n">Base</span> <span class="mi">1</span>
+<span class="s1">&#39;------------------------------------</span>
+<span class="s1">&#39;範例29 保留陣列的值，變更元素數量</span>
+<span class="s1">&#39;------------------------------------</span>
+
+<span class="n">Sub</span> <span class="n">PreserveSample</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myName</span><span class="p">()</span> <span class="n">As</span> <span class="n">String</span>
+    
+    <span class="n">Dim</span> <span class="n">r</span> <span class="n">As</span> <span class="n">Long</span><span class="p">,</span> <span class="n">r2</span> <span class="n">As</span> <span class="n">Long</span>
+    <span class="n">Dim</span> <span class="n">i</span> <span class="n">As</span> <span class="n">Long</span>
+
+    <span class="s1">&#39;將「3年A班」工作表內的資料置入陣列變數中</span>
+    <span class="n">Worksheets</span><span class="p">(</span><span class="s2">&quot;3年A班&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Activate</span>
+    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;A65536&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">End</span><span class="p">(</span><span class="n">xlUp</span><span class="p">)</span><span class="o">.</span><span class="n">Row</span>
+
+    <span class="n">ReDim</span> <span class="n">myName</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">To</span> <span class="n">r</span>
+        <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span>
+    <span class="n">Next</span>
+        
+    <span class="s1">&#39;將「3年B班」工作表內的資料新增到陣列變數中</span>
+    <span class="n">Worksheets</span><span class="p">(</span><span class="s2">&quot;3年B班&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Activate</span>
+    
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;A65536&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">End</span><span class="p">(</span><span class="n">xlUp</span><span class="p">)</span><span class="o">.</span><span class="n">Row</span>
+
+    <span class="n">ReDim</span> <span class="n">Preserve</span> <span class="n">myName</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">r2</span><span class="p">)</span>
+    
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">To</span> <span class="n">r</span> <span class="o">+</span> <span class="n">r2</span>
+        <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">Cells</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">Value</span>
+    <span class="n">Next</span>
+    
+    <span class="s1">&#39;將陣列變數的值輸出到即時運算視窗中</span>
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="n">LBound</span><span class="p">(</span><span class="n">myName</span><span class="p">)</span> <span class="n">To</span> <span class="n">UBound</span><span class="p">(</span><span class="n">myName</span><span class="p">)</span>
+        <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">myName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">Next</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>範例30 二維陣列的基本使用方式<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attribute</span> <span class="n">VB_Name</span> <span class="o">=</span> <span class="s2">&quot;Module4&quot;</span>
+<span class="n">Option</span> <span class="n">Explicit</span>
+<span class="n">Option</span> <span class="n">Base</span> <span class="mi">1</span>
+<span class="s1">&#39;-------------------------</span>
+<span class="s1">&#39;範例30 二維陣列的基本使用方式</span>
+<span class="s1">&#39;-------------------------</span>
+
+<span class="n">Sub</span> <span class="n">SampleMatrix</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="n">As</span> <span class="n">String</span>
+    
+    <span class="n">Dim</span> <span class="n">i</span> <span class="n">As</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">j</span> <span class="n">As</span> <span class="n">Integer</span>
+
+    <span class="n">myData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;陳銘德&quot;</span>
+    <span class="n">myData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;飛快汽車&quot;</span>
+
+    <span class="n">myData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;梁銘鼎&quot;</span>
+    <span class="n">myData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;鼎運資訊&quot;</span>
+
+    <span class="n">myData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;彭凱堯&quot;</span>
+    <span class="n">myData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;大富工程&quot;</span>
+
+    <span class="n">For</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">To</span> <span class="mi">3</span>
+        <span class="n">For</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">To</span> <span class="mi">2</span>
+            <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">myData</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">Next</span> <span class="n">j</span>
+    <span class="n">Next</span> <span class="n">i</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="for-each-next">
+<h2>範例31 在二維陣列中使用For Each…Next陳述式<a class="headerlink" href="#for-each-next" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;--------------------------------------------------</span>
+<span class="s1">&#39;範例31 在二維陣列中使用For Each...Next陳述式</span>
+<span class="s1">&#39;--------------------------------------------------</span>
+
+<span class="n">Sub</span> <span class="n">SampleMatrix2</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="n">As</span> <span class="n">String</span>
+    
+    <span class="n">Dim</span> <span class="n">myVal</span> <span class="n">As</span> <span class="n">Variant</span>
+
+    <span class="n">myData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;陳銘德&quot;</span>
+    <span class="n">myData</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;飛快汽車&quot;</span>
+
+    <span class="n">myData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;梁銘鼎&quot;</span>
+    <span class="n">myData</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;鼎運資訊&quot;</span>
+
+    <span class="n">myData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;彭凱堯&quot;</span>
+    <span class="n">myData</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;大富工程&quot;</span>
+
+    <span class="n">For</span> <span class="n">Each</span> <span class="n">myVal</span> <span class="n">In</span> <span class="n">myData</span>
+        <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">myVal</span>
+    <span class="n">Next</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="variant">
+<h2>範例32 將Variant型態變數設為儲存格範圍的值<a class="headerlink" href="#variant" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;--------------------------------------------------</span>
+<span class="s1">&#39;範例32 將Variant型態變數設為儲存格範圍的值</span>
+<span class="s1">&#39;--------------------------------------------------</span>
+
+<span class="n">Sub</span> <span class="n">RangeToVariant</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myData</span> <span class="n">As</span> <span class="n">Variant</span>
+    
+    <span class="n">Dim</span> <span class="n">r</span> <span class="n">As</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">c</span> <span class="n">As</span> <span class="n">Integer</span>
+    
+    <span class="n">Worksheets</span><span class="p">(</span><span class="s2">&quot;複本來源&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Activate</span>
+    
+    <span class="n">myData</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">CurrentRegion</span><span class="o">.</span><span class="n">Value</span>
+
+    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">UBound</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">UBound</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="n">Worksheets</span><span class="p">(</span><span class="s2">&quot;複本&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Activate</span>
+    
+    <span class="n">Range</span><span class="p">(</span><span class="n">Cells</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Cells</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">Value</span> <span class="o">=</span> <span class="n">myData</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>範例33 使用者自訂型態變數的基本使用方式<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attribute</span> <span class="n">VB_Name</span> <span class="o">=</span> <span class="s2">&quot;Module5&quot;</span>
+<span class="n">Option</span> <span class="n">Explicit</span>
+<span class="s1">&#39;--------------------------------</span>
+<span class="s1">&#39;範例33 使用者自訂型態變數的基本使用方式</span>
+<span class="s1">&#39;--------------------------------</span>
+
+<span class="n">Type</span> <span class="n">PersonalData</span>
+    <span class="n">PName</span> <span class="n">As</span> <span class="n">String</span>
+    <span class="n">PAge</span> <span class="n">As</span> <span class="n">Integer</span>
+    <span class="n">PDate</span> <span class="n">As</span> <span class="n">Date</span>
+<span class="n">End</span> <span class="n">Type</span>
+
+<span class="n">Sub</span> <span class="n">TypeSample</span><span class="p">()</span>
+    <span class="n">Dim</span> <span class="n">myData</span> <span class="n">As</span> <span class="n">PersonalData</span>
+    
+    <span class="n">myData</span><span class="o">.</span><span class="n">PName</span> <span class="o">=</span> <span class="s2">&quot;曹束昇&quot;</span>
+    <span class="n">myData</span><span class="o">.</span><span class="n">PAge</span> <span class="o">=</span> <span class="mi">27</span>
+    <span class="n">myData</span><span class="o">.</span><span class="n">PDate</span> <span class="o">=</span> <span class="c1">#4/1/1995#</span>
+
+    <span class="n">MsgBox</span> <span class="s2">&quot;姓名：&quot;</span> <span class="o">&amp;</span> <span class="n">myData</span><span class="o">.</span><span class="n">PName</span> <span class="o">&amp;</span> <span class="n">vbCrLf</span> <span class="o">&amp;</span> <span class="n">_</span>
+        <span class="s2">&quot;年齡：&quot;</span> <span class="o">&amp;</span> <span class="n">myData</span><span class="o">.</span><span class="n">PAge</span> <span class="o">&amp;</span> <span class="n">vbCrLf</span> <span class="o">&amp;</span> <span class="n">_</span>
+        <span class="s2">&quot;到職日：&quot;</span> <span class="o">&amp;</span> <span class="n">myData</span><span class="o">.</span><span class="n">PDate</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="static">
+<h2>範例34 Static陳述式的基本使用方式<a class="headerlink" href="#static" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;-----------------------------------</span>
+<span class="s1">&#39;範例34 Static陳述式的基本使用方式</span>
+<span class="s1">&#39;-----------------------------------</span>
+
+<span class="n">Sub</span> <span class="n">StaticSample</span><span class="p">()</span>
+    <span class="n">Static</span> <span class="n">myNum</span> <span class="n">As</span> <span class="n">Integer</span>
+    
+    <span class="n">myNum</span> <span class="o">=</span> <span class="n">myNum</span> <span class="o">+</span> <span class="mi">10</span>
+    <span class="n">MsgBox</span> <span class="n">myNum</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>範例35 使用者自訂常數的基本使用方式<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;-----------------------------------</span>
+<span class="s1">&#39;範例35 使用者自訂常數的基本使用方式</span>
+<span class="s1">&#39;-----------------------------------</span>
+
+<span class="n">Sub</span> <span class="n">ConstSample</span><span class="p">()</span>
+    <span class="n">Const</span> <span class="n">myBlue</span> <span class="n">As</span> <span class="n">Integer</span> <span class="o">=</span> <span class="mi">5</span>
+    
+    <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;I11&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Select</span>
+    <span class="n">Selection</span><span class="o">.</span><span class="n">Interior</span><span class="o">.</span><span class="n">ColorIndex</span> <span class="o">=</span> <span class="n">myBlue</span>
+<span class="n">End</span> <span class="n">Sub</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Ch03_%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86%E5%8F%8A%E5%81%B5%E9%8C%AF.html" title="previous page">Ch03 錯誤處理及偵錯</a>
+    <a class='right-next' id="next-link" href="Ch05_%E8%9E%A2%E5%B9%95%E9%A1%AF%E7%A4%BA%E5%8F%8A%E5%85%A7%E5%BB%BA%E4%BA%A4%E8%AB%87%E7%AA%97.html" title="next page">Ch05 螢幕顯示及內建交談窗</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book Community<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
